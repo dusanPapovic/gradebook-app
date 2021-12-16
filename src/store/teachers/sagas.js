@@ -1,5 +1,5 @@
 import { takeLatest, call, put } from "redux-saga/effects";
-import { getTeachers, setTeachers } from "./slice";
+import { getTeachers, setTeachers,getTeacher, setTeacher } from "./slice";
 import teachersService from "../../services/TeachersService";
 
 function* handleGetTeachers(action) {
@@ -11,6 +11,18 @@ function* handleGetTeachers(action) {
   }
 }
 
+function* handleGetTeacher(action) {
+  try {
+    const teacher = yield call(teachersService.getTeacher, action.payload);
+    yield put(setTeacher(teacher));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export function* watchGetTeachers() {
   yield takeLatest(getTeachers.type, handleGetTeachers);
+}
+export function* watchGetTeacher() {
+  yield takeLatest(getTeacher.type, handleGetTeacher);
 }

@@ -9,6 +9,12 @@ class TeachersService extends HttpService {
     const { data } = await this.client.get(endpoint);
     return data;
   };
+
+ getTeacher = async (id) => {
+    const { data } = await this.client.get(`teachers/${id}`);
+    return data;
+  };
+
 }
 
 const teachersService = new TeachersService();

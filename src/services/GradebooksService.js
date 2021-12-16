@@ -12,11 +12,15 @@ class GradebooksService extends HttpService {
     } 
 let query2=query.join("&");
    endpoint += `?${query2}`;
-
-console.log('endpoint',endpoint);
     const { data } = await this.client.get(endpoint);
     return data;
   };
+
+getGradebook = async (id) => {
+    const { data } = await this.client.get(`gradebooks/${id}`);
+    return data;
+  };
+
 }
 
 const gradebooksService = new GradebooksService();

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const middlewareActions = {
   getTeachers() {},
+  getTeacher() {},
 };
 
 const teachersSlice = createSlice({
@@ -9,9 +10,13 @@ const teachersSlice = createSlice({
   initialState: {
     allTeachers: [],
   },
+  selectedTeacher: null,
   reducers: {
     setTeachers(state, action) {
       state.allTeachers = action.payload;
+    },
+    setTeacher(state, action) {
+      state.selectedTeacher = action.payload;
     },
     ...middlewareActions,
   },
@@ -19,4 +24,4 @@ const teachersSlice = createSlice({
 
 export default teachersSlice.reducer;
 
-export const { getTeachers,setTeachers } = teachersSlice.actions;
+export const { getTeachers,setTeachers,getTeacher, setTeacher } = teachersSlice.actions;
