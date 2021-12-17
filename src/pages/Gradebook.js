@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams,useHistory } from "react-router";
 import { getGradebook, selectGradebook } from "../store/gradebooks";
 import {selectActiveUser } from "../store/auth";
-import { createComment } from "../store/gradebooks";
+import { createComment,deleteComment,throwComment } from "../store/gradebooks";
 
 export default function Gradebook() {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const [commentData, setCommentData] = useState({
 
  const activeUser = useSelector(selectActiveUser);
 console.log('activeUser',activeUser);
-console.log('activeUser_id',activeUser.id);
+console.log('activeUser_id',activeUser?.id);
 
 
   const gradebook= useSelector(selectGradebook);
@@ -41,9 +41,21 @@ console.log('activeUser_id',activeUser.id);
     setCommentData({ ...commentData, content: '' })
   }
 
+  const deleteComments = (comment_id) => {
+       let response = window.confirm(
+      "Are you sure you want to delete this comment ?\n Enter 'OK' if you are"
+    );
+
+    if (!response) {
+      return;
+    }
+  dispatch(deleteComment(comment_id));
+  dispatch(throwComment(comment_id));
+  };
+
   return (
     <div>
-      {activeUser?.id==gradebook.user?.id &&<button onClick={()=> history.push(`/gradebooks/${id}/students/create`)}>Add New Students</button>}
+      {activeUser?.id===gradebook.user?.id &&<button onClick={()=> history.push(`/gradebooks/${id}/students/create`)}>Add New Students</button>}
           <p>Name: {gradebook.name}</p>   
           <p>Profesor: {gradebook.user.first_name} {gradebook.user.last_name}</p> 
           <h3>Students list</h3>
@@ -58,11 +70,11 @@ console.log('activeUser_id',activeUser.id);
 
 {gradebook.comments_of_gradebook.map((comment) => (
           <li key={comment.id}>
-             <div>{comment.content} - {comment.user.first_name} {comment.user.last_name}</div>
+             <div>{comment.content} - {comment.user.first_name} {comment.user.last_name} {activeUser?.id===comment.user?.id &&<button onClick={()=>deleteComments(comment.id)}>Delete Comment</button>}</div>
               </li>
         ))}
 
-<h1>Create Student</h1>
+<h1>Create Comment</h1>
       <form >
         <div>
           <input

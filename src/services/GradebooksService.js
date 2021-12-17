@@ -36,6 +36,11 @@ getGradebook = async (id) => {
     return data;
   };
 
+  deleteComment = async (id) => {
+    const { data } = await this.client.delete(`/comments/${id}`);
+    return data;
+  };
+
 }
 
 const gradebooksService = new GradebooksService();

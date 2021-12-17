@@ -1,5 +1,5 @@
 import { takeLatest, call, put } from "redux-saga/effects";
-import { getGradebooks, setGradebooks,addGradebooks, getGradebook, setGradebook,createGradebook,createStudent ,createComment,addComment} from "./slice";
+import { getGradebooks, setGradebooks,addGradebooks, getGradebook, setGradebook,createGradebook,createStudent ,createComment,addComment,deleteComment} from "./slice";
 import gradebooksService from "../../services/GradebooksService";
 
 function* handleGetGradebooks(action) {
@@ -57,6 +57,14 @@ function* handleCreateComment(action) {
   }
 }
 
+function* handleDeleteComment(action) {
+  try {
+    const comment = yield call(gradebooksService.deleteComment, action.payload);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 
 export function* watchGetGradebooks() {
   yield takeLatest(getGradebooks.type, handleGetGradebooks);
@@ -76,4 +84,8 @@ export function* watchCreateStudent() {
 
 export function* watchCreateComment() {
   yield takeLatest(createComment.type, handleCreateComment);
+}
+
+export function* watchDeleteComment() {
+  yield takeLatest(deleteComment.type, handleDeleteComment);
 }

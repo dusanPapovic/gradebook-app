@@ -6,6 +6,7 @@ const middlewareActions = {
    createGradebook() {},
    createStudent() {},
     createComment() {},
+     deleteComment() {},
 };
 
 const gradebooksSlice = createSlice({
@@ -32,10 +33,14 @@ const gradebooksSlice = createSlice({
     addComment(state, action) {
       state.selectedGradebook.comments_of_gradebook.push(action.payload);
     },
+    throwComment(state, action) {
+      state.selectedGradebook.comments_of_gradebook=state.selectedGradebook.comments_of_gradebook.filter((comment) => comment.id !== action.payload);
+    console.log( state.selectedGradebook.comments_of_gradebook);
+    },
     ...middlewareActions,
   },
 });
 
 export default gradebooksSlice.reducer;
 
-export const { getGradebooks,setGradebooks,addGradebooks,getGradebook, setGradebook,createGradebook,createStudent,createComment,addComment} = gradebooksSlice.actions;
+export const { getGradebooks,setGradebooks,addGradebooks,getGradebook, setGradebook,createGradebook,createStudent,createComment,addComment,deleteComment,throwComment} = gradebooksSlice.actions;
