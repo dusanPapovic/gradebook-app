@@ -1,5 +1,5 @@
 import { takeLatest, call, put } from "redux-saga/effects";
-import { getGradebooks, setGradebooks,addGradebooks, getGradebook, setGradebook,createGradebook,createStudent ,createComment,addComment,deleteComment} from "./slice";
+import { getGradebooks, setGradebooks,addGradebooks, getGradebook, setGradebook,createGradebook,createStudent ,createComment,addComment,deleteComment,deleteGradebook,deleteStudent,getMyGradebook} from "./slice";
 import gradebooksService from "../../services/GradebooksService";
 
 function* handleGetGradebooks(action) {
@@ -65,6 +65,38 @@ function* handleDeleteComment(action) {
   }
 }
 
+function* handleDeleteGradebook(action) {
+  try {
+    const gradebook = yield call(gradebooksService.deleteGradebook, action.payload.id);
+    if (action.payload.onSuccess) {
+      yield call(action.payload.onSuccess);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* handleDeleteStudent(action) {
+  try {
+    const student = yield call(gradebooksService.deleteStudent, action.payload.id);
+    if (action.payload.onSuccess) {
+      yield call(action.payload.onSuccess);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* handleGetMyGradebook() {
+  try {
+    const gradebook = yield call(gradebooksService.getMyGradebook);
+    yield put(setGradebook(gradebook));
+  } catch (error) {
+    yield put(setGradebook(null));
+    console.log(error);
+  }
+}
+
 
 export function* watchGetGradebooks() {
   yield takeLatest(getGradebooks.type, handleGetGradebooks);
@@ -88,4 +120,15 @@ export function* watchCreateComment() {
 
 export function* watchDeleteComment() {
   yield takeLatest(deleteComment.type, handleDeleteComment);
+}
+
+export function* watchDeleteGradebook() {
+  yield takeLatest(deleteGradebook.type, handleDeleteGradebook);
+}
+export function* watchDeleteStudent() {
+  yield takeLatest(deleteStudent.type, handleDeleteStudent);
+}
+
+export function* watchGetMyGradebook() {
+  yield takeLatest(getMyGradebook.type, handleGetMyGradebook);
 }

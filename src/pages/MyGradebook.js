@@ -1,40 +1,41 @@
 import { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams,useHistory } from "react-router";
-import { getGradebook, selectGradebook } from "../store/gradebooks";
+import { getMyGradebook, selectGradebook } from "../store/gradebooks"; //ovde sam dodao getMyGradebook
 import {selectActiveUser } from "../store/auth";
 import { createComment,deleteComment,throwComment,deleteGradebook } from "../store/gradebooks";
 
-export default function Gradebook() {
+export default function MyGradebook() {
   const dispatch = useDispatch();
-  const { id } = useParams();
+//   const { id } = useParams();
  const history = useHistory();
 
 const [commentData, setCommentData] = useState({
     content: "",
   });
 
- const activeUser = useSelector(selectActiveUser);
+const activeUser = useSelector(selectActiveUser);
 console.log('activeUser',activeUser);
 console.log('activeUser_id',activeUser?.id);
 
+const gradebook= useSelector(selectGradebook);
 
-  const gradebook= useSelector(selectGradebook);
+console.log("My gradebook page", { gradebook})
 
+//   useEffect(() => {
+//     dispatch(getGradebook(id));
+//   }, [id]);
 
   useEffect(() => {
-    dispatch(getGradebook(id));
-  }, [id]);
-
-  if (!gradebook) {
-    return null;
-  }
+    dispatch(getMyGradebook());
+  }, []);
 
   function handleSubmit(event) {
     event.preventDefault();
     dispatch(
       createComment({
-        gradebook_id:id,
+        // gradebook_id:id,  menja se
+        gradebook_id:gradebook.id,
         comment: commentData,
       })
     );
@@ -73,21 +74,24 @@ console.log('activeUser_id',activeUser?.id);
 
   };
 
+
   return (
     <div>
-     <div> {activeUser?.id===gradebook.user?.id &&<button onClick={()=> history.push(`/gradebooks/${id}/students/create`)}>Add New student</button>}</div>
+{gradebook ? (
+<div>
+     <div> {activeUser?.id===gradebook.user?.id &&<button onClick={()=> history.push(`/gradebooks/${gradebook.id}/students/create`)}>Add New student</button>}</div> 
      <div> {activeUser?.id===gradebook.user?.id &&<button onClick={()=>deleteGradebooks(gradebook.id)}>Delete gradebook</button>}</div>
-     <div> {activeUser?.id===gradebook.user?.id &&<button onClick={()=> history.push(`/gradebooks/${id}/edit`)}>Edit gradebook</button>}</div>
-          <p>Name: {gradebook.name}</p>   
-          <p>Profesor: {gradebook.user.first_name} {gradebook.user.last_name}</p> 
-          <h3>Students list</h3>
-{gradebook.students.length ? (
+     <div> {activeUser?.id===gradebook.user?.id &&<button onClick={()=> history.push(`/gradebooks/${gradebook.id}/edit`)}>Edit gradebook</button>}</div>        
+        <p>Name: {gradebook.name}</p>   
+        <p>Profesor: {gradebook.user.first_name} {gradebook.user.last_name}</p> 
+        <h3>Students list</h3>
+        {gradebook.students.length ? (
           <ul>
           {gradebook.students.map((student) => (
-          <li key={student.id}>
-             <div>{student.first_name} {student.last_name}</div>
-              </li>
-        ))}
+            <li key={student.id}>
+                <div>{student.first_name} {student.last_name}</div>
+            </li>   
+            ))}
         </ul>
          ) : (
         <div>No students</div>
@@ -119,6 +123,10 @@ console.log('activeUser_id',activeUser?.id);
         </div>
         <button onClick={handleSubmit} >Submit</button>
       </form>
+</div>
+ ) : (
+        <div>No gradebook</div>
+      )}
 
     </div>
   );

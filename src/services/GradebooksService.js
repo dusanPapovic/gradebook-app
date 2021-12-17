@@ -41,6 +41,21 @@ getGradebook = async (id) => {
     return data;
   };
 
+   deleteGradebook = async (id) => {
+    const { data } = await this.client.delete(`/gradebooks/${id}`);
+    return data;
+  };
+
+  deleteStudent = async (id) => {
+    const { data } = await this.client.delete(`/students/${id}`);
+    return data;
+  };
+
+getMyGradebook = async () => {
+    const { data } = await this.client.get(`/my-gradebook`);
+    return data;
+  };
+
 }
 
 const gradebooksService = new GradebooksService();

@@ -1,23 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { logout } from "../auth";
 
 const middlewareActions = {
   getGradebooks() {},
-   getGradebook() {},
-   createGradebook() {},
-   createStudent() {},
-    createComment() {},
-     deleteComment() {},
+  getGradebook() {},
+  createGradebook() {},
+  createStudent() {},
+  createComment() {},
+  deleteComment() {},
+  deleteGradebook() {},
+  deleteStudent() {},
+  getMyGradebook() {},
 };
-
-const gradebooksSlice = createSlice({
-  name: "gradebooks",
-  initialState: {
-    page: {
+const initialState = {
+  page: {
       data: [],
       current_page: 0,
       last_page: 0,
     },
     selectedGradebook: null,
+}
+const gradebooksSlice = createSlice({
+  name: "gradebooks",
+  initialState: initialState,
+  extraReducers: builder => {
+    builder.addCase(logout.type, () => ({...initialState}))
   },
   reducers: {
     setGradebooks(state, action) {
@@ -43,4 +50,4 @@ const gradebooksSlice = createSlice({
 
 export default gradebooksSlice.reducer;
 
-export const { getGradebooks,setGradebooks,addGradebooks,getGradebook, setGradebook,createGradebook,createStudent,createComment,addComment,deleteComment,throwComment} = gradebooksSlice.actions;
+export const { getGradebooks,setGradebooks,addGradebooks,getGradebook, setGradebook,createGradebook,createStudent,createComment,addComment,deleteComment,throwComment,deleteGradebook,deleteStudent,getMyGradebook} = gradebooksSlice.actions;

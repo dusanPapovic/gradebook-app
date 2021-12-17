@@ -21,7 +21,7 @@ const dispatch = useDispatch();
       <ul>
         {teachers.map((teacher) => (
           <li key={teacher.id}>
-             <div>{teacher.first_name} {teacher.last_name} | {teacher.gradebook ?<p><Link to={`/gradebooks/${teacher.gradebook.id}`}>{teacher.gradebook.name}</Link></p> :<p>Professor is available</p>}<img src={teacher.image_url} style={{width: "100px",height: "height",}}></img>             
+             <div><Link to={`/teachers/${teacher.id}`}>{teacher.first_name} {teacher.last_name}</Link> | {teacher.gradebook ?<p><Link to={`/gradebooks/${teacher.gradebook.id}`}>{teacher.gradebook.name}</Link></p> :<p>Professor is available</p>}<img src={teacher.image_url} style={{width: "100px",height: "height",}}></img>             
              </div>
               </li>
         ))}

@@ -17,6 +17,8 @@ import Register from "./pages/Register";
 import { getActiveUser,selectIsAuthenticated } from "./store/auth";
 import CreateGradebook from "./pages/CreateGradebook";
 import CreateStudent from "./pages/CreateStudent";
+import MyGradebook from "./pages/MyGradebook";
+import EditGradebook from "./pages/EditGradebook";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,8 +56,11 @@ function App() {
            <PrivateRoute exact path="/gradebooks/:id">
             <Gradebook />
           </PrivateRoute>
+          <PrivateRoute exact path="/gradebooks/:id/edit">
+            <EditGradebook />
+          </PrivateRoute>
           <PrivateRoute exact path="/my-gradebook">
-            <Gradebook />
+            <MyGradebook />
           </PrivateRoute>
           <PrivateRoute exact path="/gradebooks/:id/students/create">
             <CreateStudent />
