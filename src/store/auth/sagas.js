@@ -6,6 +6,7 @@ import {
   register,
   setActiveUser,
   setToken,
+  setErrorAuth
 } from "./slice";
 import authService from "../../services/AuthService";
 
@@ -25,7 +26,7 @@ function* loginHandler(action) {
     yield put(setActiveUser(user));
     yield put(setToken(token));
   } catch (error) {
-    console.log(error);
+  yield put(setErrorAuth(error.response.data));
   }
 }
 
@@ -34,6 +35,7 @@ function* logoutHandler() {
     yield call(authService.logout);
     yield put(setToken(null));
     yield put(setActiveUser(null));
+    yield put(setErrorAuth(null));
   } catch (error) {
     console.log(error);
   }

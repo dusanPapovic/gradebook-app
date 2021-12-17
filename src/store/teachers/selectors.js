@@ -5,3 +5,7 @@ export function selectTeachers(state) {
 export function selectTeacher(state) {
   return state.teachers.selectedTeacher;
 }
+
+export function selectFreeTeachers(state) {
+  return state.teachers.freeTeachers;
+}

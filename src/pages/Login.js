@@ -1,9 +1,13 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../store/auth";
+import {useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login ,selectErrorAuth} from "../store/auth";
 
 export default function Login() {
   const dispatch = useDispatch();
+  const errors = useSelector(selectErrorAuth);
+  //   const store = useSelector(state=>state)
+  // console.log('stottttttttt,store',store)
+
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -13,11 +17,11 @@ export default function Login() {
     event.preventDefault()
     dispatch(login(credentials));
   }
-
   return (
     <div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
+        {errors && <div>{errors.message}</div> }
         <div>
           <input
             required

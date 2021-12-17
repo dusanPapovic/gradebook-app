@@ -15,6 +15,11 @@ class TeachersService extends HttpService {
     return data;
   };
 
+getFreeTeachers= async () => {
+    const { data } = await this.client.get("/gradebooks/freeteachers");
+    return data;
+  };
+
 }
 
 const teachersService = new TeachersService();

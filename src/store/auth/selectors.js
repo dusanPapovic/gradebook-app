@@ -5,3 +5,7 @@ export function selectActiveUser(state) {
 export function selectIsAuthenticated(state) {
   return !!state.auth.token;
 }
+
+export function selectErrorAuth(state) {
+  return state.auth.error;
+}

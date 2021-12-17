@@ -21,6 +21,21 @@ getGradebook = async (id) => {
     return data;
   };
 
+  createGradebook = async (gradebookData) => {
+    const { data } = await this.client.post("/gradebooks", gradebookData);
+    return data;
+  };
+
+  createStudent = async (id,studentData) => {
+    const { data } = await this.client.post(`/gradebooks/${id}/students`, studentData);
+    return data;
+  };
+
+  createComment = async (id,commentData) => {
+    const { data } = await this.client.post(`/gradebooks/${id}/comments`, commentData);
+    return data;
+  };
+
 }
 
 const gradebooksService = new GradebooksService();

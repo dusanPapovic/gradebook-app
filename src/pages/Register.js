@@ -26,6 +26,7 @@ export default function Register() {
           <div>
           <input
             required
+            maxLength='255'
             placeholder="First name"
             value={userData.first_name}
             onChange={({ target }) =>
@@ -36,6 +37,7 @@ export default function Register() {
         <div>
           <input
             required
+            maxLength='255'
             placeholder="Last name"
             value={userData.last_name}
             onChange={({ target }) =>
@@ -46,6 +48,7 @@ export default function Register() {
         <div>
           <input
             required
+            maxLength='255'
             type="email"
             placeholder="Email"
             value={userData.email}
@@ -57,6 +60,7 @@ export default function Register() {
         <div>
           <input
             required
+            minLength='8'
             type="password"
             placeholder="Password"
             value={userData.password}
@@ -68,6 +72,7 @@ export default function Register() {
         <div>
           <input
             required
+            minLength='8'
             type="password"
             placeholder="Confirm password"
             value={userData.password_confirmation}
@@ -90,6 +95,7 @@ export default function Register() {
 
 <div className="form-check">
           <input
+           required
             type="checkbox"
             className="form-check-input"
             value={userData.accepted_terms_conditions}

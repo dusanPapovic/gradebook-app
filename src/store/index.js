@@ -17,7 +17,7 @@ const store = configureStore({
     auth: authReducer,
   },                                   //dodato
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
+    getDefaultMiddleware({ thunk: false,serializableCheck: false, }).concat(sagaMiddleware),
 });
 
 for (const saga in sagas) {

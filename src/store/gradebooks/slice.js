@@ -3,6 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const middlewareActions = {
   getGradebooks() {},
    getGradebook() {},
+   createGradebook() {},
+   createStudent() {},
+    createComment() {},
 };
 
 const gradebooksSlice = createSlice({
@@ -26,10 +29,13 @@ const gradebooksSlice = createSlice({
     setGradebook(state, action) {
       state.selectedGradebook = action.payload;
     },
+    addComment(state, action) {
+      state.selectedGradebook.comments_of_gradebook.push(action.payload);
+    },
     ...middlewareActions,
   },
 });
 
 export default gradebooksSlice.reducer;
 
-export const { getGradebooks,setGradebooks,addGradebooks,getGradebook, setGradebook } = gradebooksSlice.actions;
+export const { getGradebooks,setGradebooks,addGradebooks,getGradebook, setGradebook,createGradebook,createStudent,createComment,addComment} = gradebooksSlice.actions;
