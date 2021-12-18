@@ -15,13 +15,16 @@ const dispatch = useDispatch();
 
 
   return (
-    <div>
-      <h1>App teachers</h1>
+    <div className="container">
+      <h1>Teachers</h1>
  <TeachersSearch />
       <ul>
         {teachers.map((teacher) => (
-          <li key={teacher.id}>
-             <div><Link to={`/teachers/${teacher.id}`}>{teacher.first_name} {teacher.last_name}</Link> | {teacher.gradebook ?<p><Link to={`/gradebooks/${teacher.gradebook.id}`}>{teacher.gradebook.name}</Link></p> :<p>Professor is available</p>}<img src={teacher.image_url} style={{width: "100px",height: "height",}}></img>             
+          <li className="list-group-item" key={teacher.id}>
+             <div className="d-flex justify-content-start">
+               <div><img src={teacher.image_url} style={{width: "150px",height: "height",}}></img>   </div> 
+              <div> <Link to={`/teachers/${teacher.id}`}> {teacher.first_name} {teacher.last_name}</Link>
+               {teacher.gradebook ?<p><Link to={`/gradebooks/${teacher.gradebook.id}`}> {teacher.gradebook.name}</Link></p> :<p>Professor is available</p>}</div>         
              </div>
               </li>
         ))}

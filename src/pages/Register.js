@@ -20,61 +20,81 @@ export default function Register() {
   }
 
   return (
-    <div>
+    <div className="container">
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-          <div>
+          <div className="form-group">
+          <label htmlFor="firstName">First name</label>
           <input
             required
             maxLength='255'
+            className="form-control" 
+            id="firstName"
             placeholder="First name"
+            autoComplete="on"
             value={userData.first_name}
             onChange={({ target }) =>
               setUserData({ ...userData, first_name: target.value })
             }
           />
         </div>
-        <div>
+        <div className="form-group">
+    <label htmlFor="lastName">Last name</label>
           <input
             required
             maxLength='255'
+            className="form-control" 
+            id="lastName"
             placeholder="Last name"
+            autoComplete="on"
             value={userData.last_name}
             onChange={({ target }) =>
               setUserData({ ...userData, last_name: target.value })
             }
           />
         </div>
-        <div>
+        <div className="form-group">
+    <label htmlFor="email">Email</label>
           <input
             required
             maxLength='255'
             type="email"
+            className="form-control" 
+            id="email"
             placeholder="Email"
+            autoComplete="on"
             value={userData.email}
             onChange={({ target }) =>
               setUserData({ ...userData, email: target.value })
             }
           />
         </div>
-        <div>
+        <div className="form-group">
+    <label htmlFor="password">Password</label>
           <input
             required
             minLength='8'
             type="password"
+            className="form-control" 
+            id="password"
             placeholder="Password"
+            autoComplete="new-password"
             value={userData.password}
             onChange={({ target }) =>
               setUserData({ ...userData, password: target.value })
             }
           />
         </div>
-        <div>
+        <div className="form-group">
+    <label htmlFor="confirmPassword">Confirm password</label>
           <input
             required
             minLength='8'
             type="password"
+            className="form-control" 
+            id="confirmPassword"
             placeholder="Confirm password"
+            autoComplete="new-password"
             value={userData.password_confirmation}
             onChange={({ target }) =>
               setUserData({ ...userData, password_confirmation: target.value })
@@ -82,10 +102,14 @@ export default function Register() {
           />
         </div>
 
-<div>
+          <div className="form-group">
+          <label htmlFor="imageUrl">Image url</label>
           <input
             required
+            className="form-control" 
+            id="imageUrl"
             placeholder="Image url"
+            autoComplete="on"
             value={userData.image_url}
             onChange={({ target }) =>
               setUserData({ ...userData, image_url: target.value })
@@ -93,7 +117,7 @@ export default function Register() {
           />
         </div>
 
-<div className="form-check">
+         <div className="form-check">
           <input
            required
             type="checkbox"
@@ -108,7 +132,7 @@ export default function Register() {
           />
           <label className="form-check-label">Accepted terms conditions</label>
         </div>
-        <button>Register</button>
+        <button className="btn btn-primary">Register</button>
       </form>
     </div>
   );

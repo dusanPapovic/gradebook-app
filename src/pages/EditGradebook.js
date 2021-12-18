@@ -46,12 +46,15 @@ useEffect(() => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
         <h1>Edit Gradebook</h1>
       <form >
-        <div>
+        <div className="form-group">
+    <label htmlFor="firstName">First name</label>
           <input
             required
+            className="form-control" 
+            id="firstName"
             placeholder="First name"
             value={studentData.first_name}
             onChange={({ target }) =>
@@ -59,9 +62,12 @@ useEffect(() => {
             }
           />
         </div>
-         <div>
+         <div className="form-group">
+    <label htmlFor="lastName">Last name</label>
           <input
             required
+            className="form-control"
+            id="lastName"
             placeholder="Last name"
             value={studentData.last_name}
             onChange={({ target }) =>
@@ -69,9 +75,12 @@ useEffect(() => {
             }
           />
         </div>
-         <div>
+         <div className="form-group">
+    <label htmlFor="imageUrl">Image url</label>
           <input
             required
+            className="form-control"
+            id="imageUrl"
             placeholder="Image url"
             value={studentData.image_url}
             onChange={({ target }) =>
@@ -79,14 +88,17 @@ useEffect(() => {
             }
           />
         </div>
-        <button onClick={handleSubmit} >Submit</button>
+        <button type="button" className="btn btn-primary" onClick={handleSubmit} >Submit</button>
       </form>
 
-<h3>Students list</h3>
+<h3>Students</h3>
 <ul>
           {gradebook.students.map((student) => (
-          <li key={student.id}>
-             <div>{student.first_name} {student.last_name} <button onClick={()=>deleteStudents(student.id)}>Delete student</button></div>
+          <li className="list-group-item" key={student.id}>
+             <div className="p-2 d-flex justify-content-between">
+               <div>{student.first_name} {student.last_name}</div> 
+               <div><button type="button" className="btn btn-danger" onClick={()=>deleteStudents(student.id)}>Delete student</button></div>
+               </div>
               </li>
         ))}
 </ul>

@@ -28,11 +28,16 @@ export default function GradebooksSearch() {
 
   return (
     <div>
+      <div className="form-group">
+    <label htmlFor="searchGradebooks">Search gradebooks</label>
       <input
         type="text"
-        onChange={debouncedChange}
+        className="form-control" 
+        id="searchGradebooks"
         placeholder="Search gradebooks"
+        onChange={debouncedChange}
       />
+      </div>
     </div>
   );
 }

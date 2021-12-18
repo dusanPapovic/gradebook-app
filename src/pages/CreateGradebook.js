@@ -37,13 +37,16 @@ useEffect(() => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
         <h1>Create Gradebook</h1>
       <form >
-        <div>
+        <div className="form-group">
+        <label htmlFor="name">Name</label>  
           <input
             required
             minLength='2'
+            className="form-control" 
+        id="name"
             placeholder="Name"
             value={gradebookData.name}
             onChange={({ target }) =>
@@ -52,7 +55,7 @@ useEffect(() => {
           />
         </div>
 
-        <select
+        <select className="custom-select"
           onChange={({ target }) =>
             setGradebookData({ ...gradebookData, user_id: target.value })
           }
@@ -65,9 +68,9 @@ useEffect(() => {
             </option>
           ))}
         </select>
-        <button onClick={handleSubmit} >Submit</button>
+        <button type="button" className="btn btn-block btn-primary" onClick={handleSubmit} >Submit</button>
       </form>
-       <button onClick={()=> history.push(`/`)} >Cancel</button>
+       <button type="button" className="btn btn-block btn-danger" onClick={()=> history.push(`/`)} >Cancel</button>
     </div>
   );
 }

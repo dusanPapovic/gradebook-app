@@ -18,26 +18,34 @@ export default function Login() {
     dispatch(login(credentials));
   }
   return (
-    <div>
+    <div className="container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        {errors && <div>{errors.message}</div> }
-        <div>
+        {/* {errors && <div>{errors.message}</div> } */}
+        <div className="form-group">
+        <label htmlFor="exampleInputEmail1">Email</label>
           <input
             required
             type="email"
+            className="form-control" 
+            id="exampleInputEmail1"
             placeholder="Email"
+             autoComplete="on"
             value={credentials.email}
             onChange={({ target }) =>
               setCredentials({ ...credentials, email: target.value })
             }
           />
         </div>
-        <div>
+        <div className="form-group">
+        <label htmlFor="exampleInputPassword1">Password</label>
           <input
             required
             type="password"
+             className="form-control" 
+            id="exampleInputPassword1"
             placeholder="Password"
+             autoComplete="on"
             value={credentials.password}
             onChange={({ target }) =>
               setCredentials({ ...credentials, password: target.value })
@@ -45,7 +53,7 @@ export default function Login() {
           />
         </div>
 
-        <button>Login</button>
+        <button className="btn btn-primary">Login</button>
       </form>
     </div>
   );

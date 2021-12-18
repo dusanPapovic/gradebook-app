@@ -76,44 +76,53 @@ console.log("My gradebook page", { gradebook})
 
 
   return (
-    <div>
+    <div className="container">
 {gradebook ? (
 <div>
-     <div> {activeUser?.id===gradebook.user?.id &&<button onClick={()=> history.push(`/gradebooks/${gradebook.id}/students/create`)}>Add New student</button>}</div> 
-     <div> {activeUser?.id===gradebook.user?.id &&<button onClick={()=>deleteGradebooks(gradebook.id)}>Delete gradebook</button>}</div>
-     <div> {activeUser?.id===gradebook.user?.id &&<button onClick={()=> history.push(`/gradebooks/${gradebook.id}/edit`)}>Edit gradebook</button>}</div>        
-        <p>Name: {gradebook.name}</p>   
-        <p>Profesor: {gradebook.user.first_name} {gradebook.user.last_name}</p> 
-        <h3>Students list</h3>
+  <div className="d-flex flex-row">
+     <div className="p-2"> {activeUser?.id===gradebook.user?.id &&<button type="button" className="btn btn-primary" onClick={()=> history.push(`/gradebooks/${gradebook.id}/students/create`)}>Add New Student</button>}</div> 
+     <div className="p-2"> {activeUser?.id===gradebook.user?.id &&<button type="button" className="btn btn-danger" onClick={()=>deleteGradebooks(gradebook.id)}>Delete Gradebook</button>}</div>
+     <div className="p-2"> {activeUser?.id===gradebook.user?.id &&<button type="button" className="btn btn-primary" onClick={()=> history.push(`/gradebooks/${gradebook.id}/edit`)}>Edit Gradebook</button>}</div>        
+        </div>
+        <h3>Gradebook: {gradebook.name}</h3>   
+        <h3>Profesor: {gradebook.user.first_name} {gradebook.user.last_name}</h3> 
+        <h3>Students</h3>
         {gradebook.students.length ? (
           <ul>
           {gradebook.students.map((student) => (
-            <li key={student.id}>
+            <li className="list-group-item" key={student.id}>
                 <div>{student.first_name} {student.last_name}</div>
             </li>   
             ))}
         </ul>
          ) : (
-        <div>No students</div>
+        <div>No Students</div>
       )}
 
 
-<h3>Comments list</h3>
+<h3>Comments</h3>
 
 <ul>
 {gradebook.comments_of_gradebook.map((comment) => (
-          <li key={comment.id}>
-             <div>{comment.content} - {comment.user.first_name} {comment.user.last_name} {activeUser?.id===comment.user?.id &&<button onClick={()=>deleteComments(comment.id)}>Delete Comment</button>}</div>
+          <li className="list-group-item" key={comment.id}>
+             <div className="d-flex flex-column">
+               <div className="p-2">Comment content: {comment.content}</div>
+              <div className="p-2 d-flex justify-content-between">User: {comment.user.first_name} {comment.user.last_name}  
+              {activeUser?.id===comment.user?.id &&<button type="button" className="btn btn-danger" onClick={()=>deleteComments(comment.id)}>Delete Comment</button>}</div> 
+               </div>
               </li>
         ))}
 </ul>
 
-<h1>Create Comment</h1>
+<h3>Create Comment</h3>
       <form >
-        <div>
+        <div className="form-group">
+           <label htmlFor="createComment">Create comment</label>
           <input
             required
             maxLength='1000'
+            className="form-control" 
+            id="createComment"
             placeholder="Content"
             value={commentData.content}
             onChange={({ target }) =>
@@ -121,11 +130,11 @@ console.log("My gradebook page", { gradebook})
             }
           />
         </div>
-        <button onClick={handleSubmit} >Submit</button>
+        <button type="button" className="btn btn-primary" onClick={handleSubmit} >Submit</button>
       </form>
 </div>
  ) : (
-        <div>No gradebook</div>
+        <div>No Gradebook</div>
       )}
 
     </div>

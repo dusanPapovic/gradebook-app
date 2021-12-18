@@ -34,12 +34,15 @@ useEffect(() => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
         <h1>Create Student</h1>
       <form >
-        <div>
+         <div className="form-group">
+    <label htmlFor="firstName">First name</label>
           <input
             required
+            className="form-control" 
+            id="firstName"
             placeholder="First name"
             value={studentData.first_name}
             onChange={({ target }) =>
@@ -47,9 +50,12 @@ useEffect(() => {
             }
           />
         </div>
-         <div>
+          <div className="form-group">
+          <label htmlFor="lastName">Last name</label>
           <input
             required
+            className="form-control" 
+            id="lastName"
             placeholder="Last name"
             value={studentData.last_name}
             onChange={({ target }) =>
@@ -57,9 +63,12 @@ useEffect(() => {
             }
           />
         </div>
-         <div>
+         <div className="form-group">
+         <label htmlFor="imageUrl">Image url</label>
           <input
             required
+            className="form-control" 
+            id="imageUrl"
             placeholder="Image url"
             value={studentData.image_url}
             onChange={({ target }) =>
@@ -67,7 +76,7 @@ useEffect(() => {
             }
           />
         </div>
-        <button onClick={handleSubmit} >Submit</button>
+        <button type="button" className="btn btn-primary" onClick={handleSubmit} >Submit</button>
       </form>
     </div>
   );

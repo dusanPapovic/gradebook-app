@@ -14,32 +14,32 @@ const isAuthenticated = useSelector(selectIsAuthenticated);
   }
 
   return (
-    <nav>
+    <nav className="navbar navbar-dark bg-light">
      {isAuthenticated ? (
-        <>
-        <li>
-        <Link to="/">Gradebooks</Link>
+        <ul className="nav">
+        <li className="nav-item">
+        <Link className="nav-link" to="/">Gradebooks</Link>
       </li>
-      <li>
-        <Link to="/teachers">All Professors</Link>
+      <li className="nav-item">
+        <Link className="nav-link" to="/teachers">All Professors</Link>
       </li>
-      <li>
-        <Link to="/my-gradebook">My Gradebook</Link>
+      <li className="nav-item">
+        <Link className="nav-link" to="/my-gradebook">My Gradebook</Link>
       </li>
-      <li>
-        <Link to="/gradebooks/create">Add Gradebook</Link>
+      <li className="nav-item">
+        <Link className="nav-link" to="/gradebooks/create">Add Gradebook</Link>
       </li>
-          <button onClick={handleLogout}>Logout</button>
-          </>
+          <button type="button" className="btn btn-primary" onClick={handleLogout}>Logout</button>
+          </ul>
         ) : (
-          <>
-            <li>
-              <Link to="/login">Login</Link>
+          <ul className="nav">
+            <li className="nav-item">
+              <Link className="nav-link" to="/login">Login</Link>
             </li>
-            <li>
-              <Link to="/register">Register</Link>
+            <li className="nav-item">
+              <Link className="nav-link" to="/register">Register</Link>
             </li>
-          </>
+          </ul>
         )} 
     </nav> 
   );

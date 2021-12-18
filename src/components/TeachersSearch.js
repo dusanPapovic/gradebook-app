@@ -28,11 +28,16 @@ export default function TeachersSearch() {
 
   return (
     <div>
+      <div className="form-group">
+    <label htmlFor="searchTeachers">Search teachers</label>
       <input
         type="text"
-        onChange={debouncedChange}
+        className="form-control" 
+        id="searchTeachers"
         placeholder="Search teachers"
+        onChange={debouncedChange}
       />
+      </div>
     </div>
   );
 }
