@@ -5,3 +5,7 @@ export function selectGradebooks(state) {
 export function selectGradebook(state) {
   return state.gradebooks.selectedGradebook;
 }
+
+export function selectErrorGradebook(state) {
+  return state.gradebooks.error;
+}

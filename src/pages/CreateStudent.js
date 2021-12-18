@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { useHistory, useParams  } from "react-router";
 import { useEffect } from "react";
-import { createStudent } from "../store/gradebooks";
+import { createStudent,selectErrorGradebook } from "../store/gradebooks";
 
 export default function CreateStudent() {
   const history = useHistory();
 const { id } = useParams();
   const dispatch = useDispatch();
-
+const errors = useSelector(selectErrorGradebook);
  
   const [studentData, setStudentData] = useState({
     first_name: "",
@@ -49,6 +49,7 @@ useEffect(() => {
               setStudentData({ ...studentData, first_name: target.value })
             }
           />
+          {errors?.first_name && <div className="text-danger">{errors.first_name}</div> }
         </div>
           <div className="form-group">
           <label htmlFor="lastName">Last name</label>
@@ -62,6 +63,7 @@ useEffect(() => {
               setStudentData({ ...studentData, last_name: target.value })
             }
           />
+          {errors?.last_name && <div className="text-danger">{errors.last_name}</div> }
         </div>
          <div className="form-group">
          <label htmlFor="imageUrl">Image url</label>
@@ -75,6 +77,7 @@ useEffect(() => {
               setStudentData({ ...studentData, image_url: target.value })
             }
           />
+           {errors?.image_url && <div className="text-danger">{errors.image_url}</div> }
         </div>
         <button type="button" className="btn btn-primary" onClick={handleSubmit} >Submit</button>
       </form>

@@ -19,6 +19,7 @@ const initialState = {
       last_page: 0,
     },
     selectedGradebook: null,
+    error:null,
 }
 const gradebooksSlice = createSlice({
   name: "gradebooks",
@@ -44,10 +45,13 @@ const gradebooksSlice = createSlice({
       state.selectedGradebook.comments_of_gradebook=state.selectedGradebook.comments_of_gradebook.filter((comment) => comment.id !== action.payload);
     console.log( state.selectedGradebook.comments_of_gradebook);
     },
+    setErrorGradebook(state, action) {
+      state.error = action.payload;
+    },
     ...middlewareActions,
   },
 });
 
 export default gradebooksSlice.reducer;
 
-export const { getGradebooks,setGradebooks,addGradebooks,getGradebook, setGradebook,createGradebook,createStudent,createComment,addComment,deleteComment,throwComment,deleteGradebook,deleteStudent,getMyGradebook} = gradebooksSlice.actions;
+export const { getGradebooks,setGradebooks,addGradebooks,getGradebook, setGradebook,createGradebook,createStudent,createComment,addComment,deleteComment,throwComment,deleteGradebook,deleteStudent,getMyGradebook,setErrorGradebook} = gradebooksSlice.actions;

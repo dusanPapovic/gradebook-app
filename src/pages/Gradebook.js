@@ -3,20 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams,useHistory } from "react-router";
 import { getGradebook, selectGradebook } from "../store/gradebooks";
 import {selectActiveUser } from "../store/auth";
-import { createComment,deleteComment,throwComment,deleteGradebook } from "../store/gradebooks";
+import { createComment,deleteComment,throwComment,deleteGradebook,selectErrorGradebook } from "../store/gradebooks";
 
 export default function Gradebook() {
   const dispatch = useDispatch();
   const { id } = useParams();
  const history = useHistory();
+ const errors = useSelector(selectErrorGradebook);
 
 const [commentData, setCommentData] = useState({
     content: "",
   });
 
  const activeUser = useSelector(selectActiveUser);
-console.log('activeUser',activeUser);
-console.log('activeUser_id',activeUser?.id);
+// console.log('activeUser',activeUser);
+// console.log('activeUser_id',activeUser?.id);
 
 
   const gradebook= useSelector(selectGradebook);
@@ -102,7 +103,7 @@ console.log('activeUser_id',activeUser?.id);
 {gradebook.comments_of_gradebook.map((comment) => (
           <li className="list-group-item" key={comment.id}>
              <div className="d-flex flex-column">
-               <div className="p-2">Comment content: {comment.content}</div> 
+               <div className="p-2" className="text-break" >Comment content: {comment.content}</div> 
                <div className="p-2 d-flex justify-content-between">User: {comment.user.first_name} {comment.user.last_name} {activeUser?.id===comment.user?.id &&<button type="button" className="btn btn-danger" onClick={()=>deleteComments(comment.id)}>Delete Comment</button>}</div>
                </div>
               </li>
@@ -124,6 +125,7 @@ console.log('activeUser_id',activeUser?.id);
               setCommentData({ ...commentData, content: target.value })
             }
           />
+           {errors?.content && <div className="text-danger">{errors.content}</div> }
         </div>
         <button type="button" className="btn btn-primary" onClick={handleSubmit} >Submit</button>
       </form>

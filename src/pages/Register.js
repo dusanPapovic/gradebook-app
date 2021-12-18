@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { register } from "../store/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { register,selectErrorAuth } from "../store/auth";
 
 export default function Register() {
   const dispatch = useDispatch();
+const errors = useSelector(selectErrorAuth);
+
   const [userData, setUserData] = useState({
     first_name: "",
     last_name: "",
@@ -31,12 +33,12 @@ export default function Register() {
             className="form-control" 
             id="firstName"
             placeholder="First name"
-            autoComplete="on"
             value={userData.first_name}
             onChange={({ target }) =>
               setUserData({ ...userData, first_name: target.value })
             }
           />
+          {errors?.first_name && <div className="text-danger">{errors.first_name}</div> }
         </div>
         <div className="form-group">
     <label htmlFor="lastName">Last name</label>
@@ -46,12 +48,12 @@ export default function Register() {
             className="form-control" 
             id="lastName"
             placeholder="Last name"
-            autoComplete="on"
             value={userData.last_name}
             onChange={({ target }) =>
               setUserData({ ...userData, last_name: target.value })
             }
           />
+          {errors?.last_name && <div className="text-danger">{errors.last_name}</div> }
         </div>
         <div className="form-group">
     <label htmlFor="email">Email</label>
@@ -62,12 +64,12 @@ export default function Register() {
             className="form-control" 
             id="email"
             placeholder="Email"
-            autoComplete="on"
             value={userData.email}
             onChange={({ target }) =>
               setUserData({ ...userData, email: target.value })
             }
           />
+          {errors?.email && <div className="text-danger">{errors.email}</div> }
         </div>
         <div className="form-group">
     <label htmlFor="password">Password</label>
@@ -84,6 +86,7 @@ export default function Register() {
               setUserData({ ...userData, password: target.value })
             }
           />
+          {errors?.password && <div className="text-danger">{errors.password}</div> }
         </div>
         <div className="form-group">
     <label htmlFor="confirmPassword">Confirm password</label>
@@ -109,12 +112,12 @@ export default function Register() {
             className="form-control" 
             id="imageUrl"
             placeholder="Image url"
-            autoComplete="on"
             value={userData.image_url}
             onChange={({ target }) =>
               setUserData({ ...userData, image_url: target.value })
             }
           />
+          {errors?.image_url && <div className="text-danger">{errors.image_url}</div> }
         </div>
 
          <div className="form-check">
@@ -131,6 +134,7 @@ export default function Register() {
             }}
           />
           <label className="form-check-label">Accepted terms conditions</label>
+          {errors?.accepted_terms_conditions && <div className="text-danger">{errors.accepted_terms_conditions}</div> }
         </div>
         <button className="btn btn-primary">Register</button>
       </form>

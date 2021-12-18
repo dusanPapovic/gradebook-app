@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { createGradebook } from "../store/gradebooks";
+import { createGradebook,selectErrorGradebook } from "../store/gradebooks";
 import { getFreeTeachers,selectFreeTeachers } from "../store/teachers";
 import { useEffect } from "react";
 
 
 export default function CreateGradebook() {
   const history = useHistory();
-
   const dispatch = useDispatch();
   const freeTeachers = useSelector(selectFreeTeachers);
+const errors = useSelector(selectErrorGradebook);
+
   const [gradebookData, setGradebookData] = useState({
     name: "",
     user_id: "",
@@ -46,13 +47,14 @@ useEffect(() => {
             required
             minLength='2'
             className="form-control" 
-        id="name"
+            id="name"
             placeholder="Name"
             value={gradebookData.name}
             onChange={({ target }) =>
               setGradebookData({ ...gradebookData, name: target.value })
             }
           />
+         {errors?.name && <div className="text-danger">{errors.name}</div> }
         </div>
 
         <select className="custom-select"

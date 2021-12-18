@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { getTeacher, selectTeacher } from "../store/teachers";
 import { Link } from "react-router-dom";
 
-export default function Movie() {
+export default function Teacher() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const teacher = useSelector(selectTeacher);
@@ -23,8 +23,14 @@ export default function Movie() {
       <div style={{ display: "flex", justifyContent: "flex-start" }}>
         <img width="300" src={teacher.image_url} alt="pic-any" />
       </div>
+      {teacher.gradebook ? (
+        <div>
       <h3><Link to={`/gradebooks/${teacher.gradebook.id}`}>{teacher.gradebook.name}</Link></h3>
        <h3>Number of students: {teacher.gradebook.students.length}</h3>
+       </div>
+       ) : (
+        <h3>No Gradebook</h3>
+      )}
     </div>
   );
 }

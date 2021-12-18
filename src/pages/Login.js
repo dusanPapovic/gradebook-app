@@ -21,7 +21,7 @@ export default function Login() {
     <div className="container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        {/* {errors && <div>{errors.message}</div> } */}
+        {errors && <h3 className="text-danger">{errors.message}</h3> }
         <div className="form-group">
         <label htmlFor="exampleInputEmail1">Email</label>
           <input
@@ -30,7 +30,6 @@ export default function Login() {
             className="form-control" 
             id="exampleInputEmail1"
             placeholder="Email"
-             autoComplete="on"
             value={credentials.email}
             onChange={({ target }) =>
               setCredentials({ ...credentials, email: target.value })
@@ -45,7 +44,6 @@ export default function Login() {
              className="form-control" 
             id="exampleInputPassword1"
             placeholder="Password"
-             autoComplete="on"
             value={credentials.password}
             onChange={({ target }) =>
               setCredentials({ ...credentials, password: target.value })

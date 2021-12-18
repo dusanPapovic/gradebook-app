@@ -12,16 +12,20 @@ import authService from "../../services/AuthService";
 
 function* registerHandler(action) {
   try {
+     yield put(setErrorAuth(null));
     const { user, token } = yield call(authService.register, action.payload);
     yield put(setActiveUser(user));
     yield put(setToken(token));
   } catch (error) {
+    console.log(error.response);
+    yield put(setErrorAuth(error.response.data.errors));
     console.log(error);
   }
 }
 
 function* loginHandler(action) {
   try {
+    yield put(setErrorAuth(null));
     const { user, token } = yield call(authService.login, action.payload);
     yield put(setActiveUser(user));
     yield put(setToken(token));
@@ -35,7 +39,6 @@ function* logoutHandler() {
     yield call(authService.logout);
     yield put(setToken(null));
     yield put(setActiveUser(null));
-    yield put(setErrorAuth(null));
   } catch (error) {
     console.log(error);
   }

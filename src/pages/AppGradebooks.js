@@ -32,14 +32,14 @@ const dispatch = useDispatch();
           <li className="list-group-item" key={gradebook.id}>
              <div className="d-flex justify-content-between">
                <div><Link to={`/gradebooks/${gradebook.id}`}>{gradebook.name}</Link> </div>
-              <div>{gradebook ?(<Link to={`/teachers/${gradebook.user.id}`}>{gradebook.user.first_name} {gradebook.user.last_name}</Link> ) : ( <div>No teacher</div> )}</div>
+              <div>{gradebook ?(<Link to={`/teachers/${gradebook.user.id}`}>{gradebook.user.first_name} {gradebook.user.last_name}</Link> ) : ( <div>No Teacher</div> )}</div>
       <div> {gradebook.created_at.slice(0,10)}</div>
       </div>
               </li>
         ))}
       </ul>
        ) : (
-         <div>No Gradebooks</div>
+         <h3>No Gradebooks</h3>
       )}
        {gradebooks.current_page!==gradebooks.last_page && <button type="button" className="btn btn-block btn-primary" onClick={()=>add(gradebooks.current_page)}>LOAD MORE</button> }
 

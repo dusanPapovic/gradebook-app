@@ -12,7 +12,7 @@ export default function TeachersSearch() {
   }
 
   const search = () => {
-    if (!searchTerm || searchTerm.length > 2) {
+    if (!searchTerm || searchTerm.length > 0) {
       dispatch(getTeachers(searchTerm));
     }
   };
@@ -29,7 +29,7 @@ export default function TeachersSearch() {
   return (
     <div>
       <div className="form-group">
-    <label htmlFor="searchTeachers">Search teachers</label>
+    <label htmlFor="searchTeachers">Search teachers name</label>
       <input
         type="text"
         className="form-control" 

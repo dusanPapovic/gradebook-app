@@ -1,5 +1,5 @@
 import { takeLatest, call, put } from "redux-saga/effects";
-import { getGradebooks, setGradebooks,addGradebooks, getGradebook, setGradebook,createGradebook,createStudent ,createComment,addComment,deleteComment,deleteGradebook,deleteStudent,getMyGradebook} from "./slice";
+import { getGradebooks, setGradebooks,addGradebooks, getGradebook, setGradebook,createGradebook,createStudent ,createComment,addComment,deleteComment,deleteGradebook,deleteStudent,getMyGradebook,setErrorGradebook} from "./slice";
 import gradebooksService from "../../services/GradebooksService";
 
 function* handleGetGradebooks(action) {
@@ -18,7 +18,7 @@ if(action.payload?.page>1){
 function* handleGetGradebook(action) {
   try {
     const gradebook = yield call(gradebooksService.getGradebook, action.payload);
-    console.log('gradebook',gradebook);
+    // console.log('gradebook',gradebook);
     yield put(setGradebook(gradebook));
   } catch (error) {
     console.log(error);
@@ -27,32 +27,38 @@ function* handleGetGradebook(action) {
 
 function* handleCreateGradebook(action) {
   try {
+     yield put(setErrorGradebook(null));
     const gradebook = yield call(gradebooksService.createGradebook, action.payload.gradebook);
     if (action.payload.onSuccess) {
       yield call(action.payload.onSuccess);
     }
   } catch (error) {
+     yield put(setErrorGradebook(error.response.data.errors));
     console.error(error);
   }
 }
 
 function* handleCreateStudent(action) {
   try {
+    yield put(setErrorGradebook(null));
     const student = yield call(gradebooksService.createStudent, action.payload.gradebook_id,action.payload.student);
 
     if (action.payload.onSuccess) {
       yield call(action.payload.onSuccess);
     }
   } catch (error) {
+     yield put(setErrorGradebook(error.response.data.errors));
     console.error(error);
   }
 }
 
 function* handleCreateComment(action) {
   try {
+     yield put(setErrorGradebook(null));
     const comment = yield call(gradebooksService.createComment, action.payload.gradebook_id,action.payload.comment);
     yield put(addComment(comment));  
   } catch (error) {
+     yield put(setErrorGradebook(error.response.data.errors));
     console.error(error);
   }
 }
