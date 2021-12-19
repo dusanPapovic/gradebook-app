@@ -58,6 +58,7 @@ useEffect(() => {
         </div>
 
 <div className="form-group">
+  <label htmlFor="name">Select teacher</label>
         <select className="custom-select"
           onChange={({ target }) =>
             setGradebookData({ ...gradebookData, user_id: target.value })

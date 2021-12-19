@@ -34,7 +34,6 @@ function* handleCreateGradebook(action) {
       yield call(action.payload.onSuccess);
     }
   } catch (error) {
-    console.log(error.response);
      yield put(setErrorGradebook(error.response.data.errors));
     console.error(error);
   }

@@ -17,7 +17,6 @@ function* registerHandler(action) {
     yield put(setActiveUser(user));
     yield put(setToken(token));
   } catch (error) {
-    console.log(error.response);
     yield put(setErrorAuth(error.response.data.errors));
     console.log(error);
   }
