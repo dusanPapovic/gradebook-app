@@ -22,7 +22,7 @@ const dispatch = useDispatch();
         {teachers.map((teacher) => (
           <li className="list-group-item" key={teacher.id}>
              <div className="d-flex justify-content-start">
-               <div><img src={teacher.image_url} style={{width: "150px",height: "height",}}></img>   </div> 
+               <div><img src={teacher.image_url} style={{width: "150px",height:"100px"}}></img>   </div> 
               <div> <Link to={`/teachers/${teacher.id}`}> {teacher.first_name} {teacher.last_name}</Link>
                {teacher.gradebook ?<p><Link to={`/gradebooks/${teacher.gradebook.id}`}> {teacher.gradebook.name}</Link></p> :<p>Professor is available</p>}</div>         
              </div>

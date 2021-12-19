@@ -30,9 +30,11 @@ function* handleCreateGradebook(action) {
      yield put(setErrorGradebook(null));
     const gradebook = yield call(gradebooksService.createGradebook, action.payload.gradebook);
     if (action.payload.onSuccess) {
+
       yield call(action.payload.onSuccess);
     }
   } catch (error) {
+    console.log(error.response);
      yield put(setErrorGradebook(error.response.data.errors));
     console.error(error);
   }

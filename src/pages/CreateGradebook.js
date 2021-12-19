@@ -57,6 +57,7 @@ useEffect(() => {
          {errors?.name && <div className="text-danger">{errors.name}</div> }
         </div>
 
+<div className="form-group">
         <select className="custom-select"
           onChange={({ target }) =>
             setGradebookData({ ...gradebookData, user_id: target.value })
@@ -70,6 +71,8 @@ useEffect(() => {
             </option>
           ))}
         </select>
+        {errors?.user_id && <div className="text-danger">{errors.user_id}</div> }
+        </div>
         <button type="button" className="btn btn-block btn-primary" onClick={handleSubmit} >Submit</button>
       </form>
        <button type="button" className="btn btn-block btn-danger" onClick={()=> history.push(`/`)} >Cancel</button>

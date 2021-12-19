@@ -21,7 +21,7 @@ export default function Teacher() {
       <h3>{teacher.first_name}</h3>
      <h3>{teacher.last_name}</h3>
       <div style={{ display: "flex", justifyContent: "flex-start" }}>
-        <img width="300" src={teacher.image_url} alt="pic-any" />
+        <img width="300px" src={teacher.image_url} alt="pic-any" />
       </div>
       {teacher.gradebook ? (
         <div>
